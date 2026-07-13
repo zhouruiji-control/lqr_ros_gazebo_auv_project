@@ -174,7 +174,7 @@ class PidNode :  public rclcpp::Node{
     rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr d_term_pub_;
     double target=10.0;
     double dt=0.1;
-    double total_time = 70;
+    double total_time = 100;
     int steps = total_time / dt;
     pid p= pid(0.25,0.015,0.8);
     auvmodel auv=auvmodel(0.0,0,0.8);
@@ -206,7 +206,12 @@ class PidNode :  public rclcpp::Node{
     p_term_pub_ = this->create_publisher<std_msgs::msg::Float64>("/auv/p_term",10);
     i_term_pub_ = this->create_publisher<std_msgs::msg::Float64>("/auv/i_term",10);
     d_term_pub_ = this->create_publisher<std_msgs::msg::Float64>("/auv/d_term",10);
-    file.open("auv_pid_result.csv");
+    std::string csv_filename =
+    "auv_pid_" +
+    std::to_string(static_cast<int>(target)) +
+    "m.csv";
+
+file.open(csv_filename, std::ios::out);
     if(!file.is_open()){
         cout<<"csv is fail"<<endl;
     }

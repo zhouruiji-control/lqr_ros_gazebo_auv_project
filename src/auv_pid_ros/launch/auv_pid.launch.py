@@ -3,11 +3,13 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
+    auv_pid_node = Node(
+        package='auv_pid_ros',
+        executable='auv_pid_node',
+        name='auv_pid_node',
+        output='screen'
+    )
+
     return LaunchDescription([
-        Node(
-            package='auv_pid_ros',
-            executable='auv_pid_node',
-            name='auv_pid_node',
-            output='screen'
-        )
+        auv_pid_node
     ])
