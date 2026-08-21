@@ -172,7 +172,7 @@ class PidNode :  public rclcpp::Node{
     rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr p_term_pub_;
     rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr i_term_pub_;
     rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr d_term_pub_;
-    double target=10.0;
+    double target=20.0;
     double dt=0.1;
     double total_time = 100;
     int steps = total_time / dt;
