@@ -28,7 +28,7 @@ def generate_launch_description():
     # 读取 Gazebo 实际深度和垂向速度
     # ==================================================
     force_depth_feedback_node = Node(
-        package="auv_pid_ros",
+        package="auv_lqr_ros",
         executable="force_depth_feedback_node",
         name="force_depth_feedback_node",
         output="screen",
@@ -45,7 +45,7 @@ def generate_launch_description():
     # 将 PID 输出转换为 Gazebo 持续外力
     # ==================================================
     gazebo_force_node = Node(
-        package="auv_pid_ros",
+        package="auv_lqr_ros",
         executable="gazebo_force_node",
         name="gazebo_force_node",
         output="screen",
@@ -63,10 +63,10 @@ def generate_launch_description():
     # ==================================================
     # 只负责 PID 计算
     # ==================================================
-    pid_controller_only_node = Node(
-        package="auv_pid_ros",
-        executable="pid_controller_only_node",
-        name="pid_controller_only_node",
+    lqr_controller_node = Node(
+        package="auv_lqr_ros",
+        executable="lqr_controller_node",
+        name="lqr_controller_node",
         output="screen",
     )
 
@@ -95,7 +95,7 @@ def generate_launch_description():
         TimerAction(
             period=5.0,
             actions=[
-                pid_controller_only_node,
+                lqr_controller_node,
             ],
         ),
     ])
